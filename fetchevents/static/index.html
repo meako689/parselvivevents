@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html lang="en" ng-app="plunker">
+  <head>
+    <meta charset="utf-8">
+    <title>My HTML File</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css">
+  </head>
+  <body ng-controller="MainCtrl" >
+    
+    <div class="container">
+    <h1>Кількість подій</h1>
+    <nvd3 options="chartOptions" data="chartData"></nvd3>
+
+    <div class="row">
+      <label class="col-sm-1"><input type="checkbox" ng-model="filters.checkbox.dou">dou</label>
+      <label class="col-sm-1"><input type="checkbox" ng-model="filters.checkbox.afisha">afisha</label>
+      <label class="col-sm-1"><input type="checkbox" ng-model="filters.checkbox.morepodiy">morepodiy</label>
+      <input class="col-sm-2" type="text" ng-model="filters.date">
+    </div>
+
+
+    <div class="row">
+    <div class="table-responsive">
+  <table st-table="tableData" st-safe-src="eventDataFiltered.objects" class="table table-striped" style="table-layout:fixed">
+      <thead>
+      <tr>
+          <th st-sort="start_date" class="col-sm-1">Date</th>
+          <th class="col-sm-7">Title</th>
+          <th class="col-sm-1">Tags</th>
+          <th class="col-sm-2">Location</th>
+          <th st-sort="source" class="col-sm-1">source</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in tableData">
+          <td>{{row.start_date}}</td>
+          <td >{{row.title}}</td>
+          <td><span ng-repeat="tag in row.tags">{{tag.title}} </span></td>
+          <td>{{row.location}}</td>
+          <td><a href="{{row.url}}">{{row.source}}</a></td>
+      </tr>
+      </tbody>
+  </table>
+      
+    </div>
+      
+    </div>
+
+      
+    </div>
+  </body>
+
+</html>
